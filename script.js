@@ -8,6 +8,14 @@ function capitalize(word) {
   return word[0].toUpperCase() + word.substring(1).toLowerCase();
 }
 
+function showWinner(playerWins, computerWins) {
+  if (playerWins === 0 && computerWins === 0) console.log("It's a tie folks!!");
+  else if (playerWins > computerWins)
+    console.log("You have won the Game, Congrautlations!!!");
+  else if (computerWins > playerWins)
+    console.log("You Lose!, Better luck next time!!! ");
+}
+
 function playRound(playerSelection, computerSelection) {
   let result;
   switch (true) {
@@ -49,12 +57,7 @@ function game() {
     if (roundResult === 1) playerWins++;
     else if (roundResult === 2) computerWins++;
   }
-
-  if (playerWins === 0 && computerWins === 0) console.log("It's a tie folks!!");
-  else if (playerWins > computerWins)
-    console.log("You have won the Game, Congrautlations!!!");
-  else if (computerWins > playerWins)
-    console.log("You Lose!, Better luck next time!!! ");
+  showWinner(playerWins, computerWins);
 }
 
 game();
