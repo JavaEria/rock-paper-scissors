@@ -1,7 +1,7 @@
-const GAME_RULE = { 1: "ROCK", 2: "PAPER", 3: "SCISSORS" };
+const GAME_RULE = ["ROCK", "PAPER", "SCISSORS"];
 
 function getComputerChoice() {
-  return GAME_RULE[Math.floor(Math.random() * 3) + 1];
+  return GAME_RULE[Math.floor(Math.random() * 3)];
 }
 
 function capitalize(word) {
@@ -11,7 +11,7 @@ function capitalize(word) {
 function showWinner(playerWins, computerWins) {
   if (playerWins === 0 && computerWins === 0) console.log("It's a tie folks!!");
   else if (playerWins > computerWins)
-    console.log("You have won the Game, Congrautlations!!!");
+    console.log("You have won the Game, Congratulations!!!");
   else if (computerWins > playerWins)
     console.log("You Lose!, Better luck next time!!! ");
 }
@@ -50,13 +50,11 @@ function playRound(playerSelection, computerSelection) {
 function game() {
   let playerWins = 0;
   let computerWins = 0;
-  for (i = 0; i < 5; i++) {
-    const playerSelection = prompt("Rock, Paper, Scissors? ").toUpperCase();
-    const computerSelection = getComputerChoice();
-    let roundResult = playRound(playerSelection, computerSelection);
-    if (roundResult === 1) playerWins++;
-    else if (roundResult === 2) computerWins++;
-  }
+  const playerSelection = prompt("Rock, Paper, Scissors? ").toUpperCase();
+  const computerSelection = getComputerChoice();
+  let roundResult = playRound(playerSelection, computerSelection);
+  if (roundResult === 1) playerWins++;
+  else if (roundResult === 2) computerWins++;
   showWinner(playerWins, computerWins);
 }
 
