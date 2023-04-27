@@ -27,11 +27,14 @@ function capitalize(word) {
 }
 
 function showWinner(playerWins, computerWins) {
-  if (playerWins === 0 && computerWins === 0) console.log("It's a tie folks!!");
+  const winnerContent = document.createElement("p");
+  if (playerWins === 0 && computerWins === 0)
+    winnerContent.textContent = "It's a tie folks!!";
   else if (playerWins > computerWins)
-    finalDiv.textContent += "\n You have won the Game, Congratulations!!!";
+    winnerContent.textContent += "You have won the Game, Congratulations!!!";
   else if (computerWins > playerWins)
-    finalDiv.textContent += "\n You Lose!, Better luck next time!!!";
+    winnerContent.textContent += "You Lose!, Better luck next time!!!";
+  finalDiv.appendChild(winnerContent);
 }
 
 function playRound(playerSelection, computerSelection) {
@@ -39,16 +42,12 @@ function playRound(playerSelection, computerSelection) {
   switch (true) {
     case playerSelection === computerSelection:
       result = 0;
-      console.log("Its' a tie!!");
       resultDiv.textContent = "Its' a tie!!";
       break;
     case (playerSelection === "ROCK" && computerSelection === "SCISSORS") ||
       (playerSelection === "SCISSORS" && computerSelection === "PAPER") ||
       (playerSelection === "PAPER" && computerSelection === "ROCK"):
       result = 1;
-      console.log(
-        `${capitalize(playerSelection)} beats ${capitalize(computerSelection)}`
-      );
       resultDiv.textContent = `${capitalize(
         playerSelection
       )} beats ${capitalize(computerSelection)}`;
@@ -60,13 +59,9 @@ function playRound(playerSelection, computerSelection) {
       resultDiv.textContent = `${capitalize(
         computerSelection
       )} beats ${capitalize(playerSelection)}`;
-      console.log(
-        `${capitalize(computerSelection)} beats ${capitalize(playerSelection)}`
-      );
       break;
     default:
       result = -1;
-      console.log("Well that's awkward!");
       resultDiv.textContent = "Well that's awkward!";
       break;
   }
@@ -86,5 +81,3 @@ function game(playerSelection) {
     scissorsButton.disabled = true;
   }
 }
-
-//game();
