@@ -22,10 +22,6 @@ function getComputerChoice() {
   return GAME_RULE[Math.floor(Math.random() * 3)];
 }
 
-function capitalize(word) {
-  return word[0].toUpperCase() + word.substring(1).toLowerCase();
-}
-
 function showWinner(playerWins, computerWins) {
   const winnerContent = document.createElement("p");
   if (playerWins === 0 && computerWins === 0)
@@ -48,17 +44,13 @@ function playRound(playerSelection, computerSelection) {
       (playerSelection === "SCISSORS" && computerSelection === "PAPER") ||
       (playerSelection === "PAPER" && computerSelection === "ROCK"):
       result = 1;
-      resultDiv.textContent = `${capitalize(
-        playerSelection
-      )} beats ${capitalize(computerSelection)}`;
+      resultDiv.textContent = `${playerSelection} beats ${computerSelection}`;
       break;
     case (playerSelection === "SCISSORS" && computerSelection === "ROCK") ||
       (playerSelection === "PAPER" && computerSelection === "SCISSORS") ||
       (playerSelection === "ROCK" && computerSelection === "PAPER"):
       result = 2;
-      resultDiv.textContent = `${capitalize(
-        computerSelection
-      )} beats ${capitalize(playerSelection)}`;
+      resultDiv.textContent = `${computerSelection} beats ${playerSelection}`;
       break;
     default:
       result = -1;
