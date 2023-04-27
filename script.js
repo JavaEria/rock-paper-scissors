@@ -58,4 +58,13 @@ function game() {
   showWinner(playerWins, computerWins);
 }
 
-game();
+//game();
+document.querySelector("#ROCK").addEventListener("click", () => {
+  // game("ROCK")
+});
+document.querySelector("#PAPER").addEventListener("click", () => {
+  // game("ROCK")
+});
+document.querySelector("#SCISSORS").addEventListener("click", () => {
+  // game("ROCK")
+});
