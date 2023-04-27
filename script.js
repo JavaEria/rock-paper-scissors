@@ -1,4 +1,22 @@
 const GAME_RULE = ["ROCK", "PAPER", "SCISSORS"];
+let playerWins = 0;
+let computerWins = 0;
+
+const rockButton = document.querySelector("#rock");
+const paperButton = document.querySelector("#paper");
+const scissorsButton = document.querySelector("#scissors");
+const resultDiv = document.querySelector("#result");
+const finalDiv = document.querySelector("#final");
+
+rockButton.addEventListener("click", () => {
+  game("ROCK");
+});
+paperButton.addEventListener("click", () => {
+  game("PAPER");
+});
+scissorsButton.addEventListener("click", () => {
+  game("SCISSORS");
+});
 
 function getComputerChoice() {
   return GAME_RULE[Math.floor(Math.random() * 3)];
@@ -11,60 +29,62 @@ function capitalize(word) {
 function showWinner(playerWins, computerWins) {
   if (playerWins === 0 && computerWins === 0) console.log("It's a tie folks!!");
   else if (playerWins > computerWins)
-    console.log("You have won the Game, Congratulations!!!");
+    finalDiv.textContent += "\n You have won the Game, Congratulations!!!";
   else if (computerWins > playerWins)
-    console.log("You Lose!, Better luck next time!!! ");
+    finalDiv.textContent += "\n You Lose!, Better luck next time!!!";
 }
 
 function playRound(playerSelection, computerSelection) {
   let result;
   switch (true) {
     case playerSelection === computerSelection:
-      console.log("Its' a tie!!");
       result = 0;
+      console.log("Its' a tie!!");
+      resultDiv.textContent = "Its' a tie!!";
       break;
     case (playerSelection === "ROCK" && computerSelection === "SCISSORS") ||
       (playerSelection === "SCISSORS" && computerSelection === "PAPER") ||
       (playerSelection === "PAPER" && computerSelection === "ROCK"):
+      result = 1;
       console.log(
         `${capitalize(playerSelection)} beats ${capitalize(computerSelection)}`
       );
-      result = 1;
+      resultDiv.textContent = `${capitalize(
+        playerSelection
+      )} beats ${capitalize(computerSelection)}`;
       break;
     case (playerSelection === "SCISSORS" && computerSelection === "ROCK") ||
       (playerSelection === "PAPER" && computerSelection === "SCISSORS") ||
       (playerSelection === "ROCK" && computerSelection === "PAPER"):
+      result = 2;
+      resultDiv.textContent = `${capitalize(
+        computerSelection
+      )} beats ${capitalize(playerSelection)}`;
       console.log(
         `${capitalize(computerSelection)} beats ${capitalize(playerSelection)}`
       );
-      result = 2;
       break;
     default:
-      console.log("Well that's awkward!");
       result = -1;
+      console.log("Well that's awkward!");
+      resultDiv.textContent = "Well that's awkward!";
       break;
   }
   return result;
 }
 
-function game() {
-  let playerWins = 0;
-  let computerWins = 0;
-  const playerSelection = prompt("Rock, Paper, Scissors? ").toUpperCase();
+function game(playerSelection) {
   const computerSelection = getComputerChoice();
   let roundResult = playRound(playerSelection, computerSelection);
   if (roundResult === 1) playerWins++;
   else if (roundResult === 2) computerWins++;
-  showWinner(playerWins, computerWins);
+  finalDiv.textContent = `Player Score: ${playerWins} Computer Score: ${computerWins}`;
+  if (playerWins === 5 || computerWins === 5) {
+    showWinner(playerWins, computerWins);
+    rockButton.disabled = true;
+    paperButton.disabled = true;
+    scissorsButton.disabled = true;
+  }
 }
 
 //game();
-document.querySelector("#ROCK").addEventListener("click", () => {
-  // game("ROCK")
-});
-document.querySelector("#PAPER").addEventListener("click", () => {
-  // game("ROCK")
-});
-document.querySelector("#SCISSORS").addEventListener("click", () => {
-  // game("ROCK")
-});
